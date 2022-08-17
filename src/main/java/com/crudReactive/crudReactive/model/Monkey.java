@@ -7,18 +7,16 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import java.util.Objects;
 import java.util.UUID;
 
-@Document(collation = "Monkey")
+@Document(collection = "monkey")
 public class Monkey {
-
     @Id
-    private String id = UUID.randomUUID()
-            .toString().substring(0, 10);
+    private String id;
     private String name;
     private Integer edad;
     private Boolean isWorking;
 
     public Monkey(String id, String name, Integer edad, Boolean isWorking) {
-        this.id = id;
+        this.id = UUID.randomUUID().toString();
         this.name = name;
         this.edad = edad;
         this.isWorking = isWorking;
