@@ -19,11 +19,22 @@ public class MonkeyServiceImpl implements MonkeyService {
     }
     @Override
     public Mono<Monkey> delete(String id) {
-        return null;
+        return this.monkeyRepository
+                .findById(id).flatMap(p ->
+                        this.monkeyRepository
+                                .deleteById(p.getId())
+                                .thenReturn(p));
     }
     @Override
     public Mono<Monkey> update(String id, Monkey monkey) {
-        return null;
+        return this.monkeyRepository.findById(id)
+                .flatMap(m -> {
+                    m.setId(id);
+                    m.setAge(monkey.getAge());
+                    m.setName(monkey.getName());
+                    m.setWorking(monkey.getWorking());
+                    return save(m);
+                }).switchIfEmpty(Mono.empty());
     }
     @Override
     public Flux<Monkey> findAll() {

@@ -11,7 +11,6 @@ import reactor.core.publisher.Mono;
 
 @RestController
 public class MonkeyController {
-
     @Autowired
     private MonkeyService monkeyService;
 
@@ -20,19 +19,32 @@ public class MonkeyController {
     private Mono<Monkey> save(@RequestBody Monkey monkey) {
         return this.monkeyService.save(monkey);
     }
-    @DeleteMapping("/users/{id}")
+    @DeleteMapping("/deleteMonkey/{id}")
     private Mono<ResponseEntity<String>> delete
             (@PathVariable("id") String id) {
 
         return this.monkeyService.delete(id)
-                .flatMap(user -> Mono.just(ResponseEntity
+                .flatMap(monkey -> Mono.just(ResponseEntity
                         .ok("Deleted Successfully")))
                 .switchIfEmpty(Mono.just(ResponseEntity
                         .notFound().build()));
     }
+    @PutMapping("/updateMonkey/{id}")
+    private Mono<ResponseEntity<Monkey>> update
+            (@PathVariable("id") String id,
+             @RequestBody Monkey monkey) {
+        return this.monkeyService.update(id, monkey)
+                .flatMap(monkey1 -> Mono.just(ResponseEntity
+                        .ok(monkey1))).switchIfEmpty(Mono
+                        .just(ResponseEntity.notFound().build()));
+    }
     @GetMapping(value = "/monkeys")
     private Flux<Monkey> findAll() {
         return this.monkeyService.findAll();
+    }
+    @GetMapping("/getMonkey/{id}")
+    private Mono<Monkey> findById(@PathVariable("id") String id) {
+        return this.monkeyService.findById(id);
     }
 
 }

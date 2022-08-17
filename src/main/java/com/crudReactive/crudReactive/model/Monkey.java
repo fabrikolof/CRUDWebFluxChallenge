@@ -10,17 +10,10 @@ import java.util.UUID;
 @Document(collection = "monkey")
 public class Monkey {
     @Id
-    private String id;
+    private String id = UUID.randomUUID().toString();
     private String name;
-    private Integer edad;
+    private Integer age;
     private Boolean isWorking;
-
-    public Monkey(String id, String name, Integer edad, Boolean isWorking) {
-        this.id = UUID.randomUUID().toString();
-        this.name = name;
-        this.edad = edad;
-        this.isWorking = isWorking;
-    }
 
     public String getId() {
         return id;
@@ -38,12 +31,12 @@ public class Monkey {
         this.name = name;
     }
 
-    public Integer getEdad() {
-        return edad;
+    public Integer getAge() {
+        return age;
     }
 
-    public void setEdad(Integer edad) {
-        this.edad = edad;
+    public void setAge(Integer age) {
+        this.age = age;
     }
 
     public Boolean getWorking() {
