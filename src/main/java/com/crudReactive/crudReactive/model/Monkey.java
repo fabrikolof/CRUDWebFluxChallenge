@@ -10,7 +10,7 @@ import java.util.UUID;
 @Document(collection = "monkey")
 public class Monkey {
     @Id
-    private String id = UUID.randomUUID().toString();
+    private String id = UUID.randomUUID().toString().substring(0, 8);
     private String name;
     private Integer age;
     private Boolean isWorking;

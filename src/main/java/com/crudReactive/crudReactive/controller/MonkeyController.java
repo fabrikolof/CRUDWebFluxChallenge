@@ -50,5 +50,9 @@ public class MonkeyController {
     private Mono<Monkey> findById(@PathVariable("id") String id) {
         return this.monkeyService.findById(id);
     }
+    @GetMapping("/getWorkingMonkeys")
+    private Flux<Monkey> monkeysWorking() {
+        return this.monkeyService.monkeysWorking();
+    }
 
 }

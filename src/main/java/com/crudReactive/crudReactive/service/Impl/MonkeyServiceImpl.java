@@ -49,4 +49,12 @@ public class MonkeyServiceImpl implements MonkeyService {
         return this.monkeyRepository.deleteAll();
     }
 
+    @Override
+    public Flux<Monkey> monkeysWorking() {
+        return this.monkeyRepository
+                .findAll()
+                .filter(monkey -> monkey.getWorking().equals(true));
+    }
+
+
 }
