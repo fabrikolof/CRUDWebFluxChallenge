@@ -44,5 +44,9 @@ public class MonkeyServiceImpl implements MonkeyService {
     public Mono<Monkey> findById(String id) {
         return this.monkeyRepository.findById(id);
     }
+    @Override
+    public Mono<Void> deleteAll() {
+        return this.monkeyRepository.deleteAll();
+    }
 
 }

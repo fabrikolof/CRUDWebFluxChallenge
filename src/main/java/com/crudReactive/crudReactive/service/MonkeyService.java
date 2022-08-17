@@ -10,4 +10,5 @@ public interface MonkeyService {
     Mono<Monkey> update(String id, Monkey monkey);
     Flux<Monkey> findAll();
     Mono<Monkey> findById(String id);
+    Mono<Void> deleteAll();
 }

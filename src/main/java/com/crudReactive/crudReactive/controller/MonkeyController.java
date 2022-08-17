@@ -29,6 +29,10 @@ public class MonkeyController {
                 .switchIfEmpty(Mono.just(ResponseEntity
                         .notFound().build()));
     }
+    @DeleteMapping("/deleteAllMonkeys")
+    Mono<Void> deleteAll() {
+        return this.monkeyService.deleteAll();
+    }
     @PutMapping("/updateMonkey/{id}")
     private Mono<ResponseEntity<Monkey>> update
             (@PathVariable("id") String id,
